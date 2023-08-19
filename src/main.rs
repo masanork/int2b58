@@ -29,9 +29,24 @@ fn decode_base58(s: &str) -> Result<u64, &'static str> {
     Ok(num)
 }
 
+fn print_help() {
+    println!("int2b58 - Convert integers to Base58 and vice versa.");
+    println!("Usage:");
+    println!("  int2b58        Convert integer from stdin to Base58.");
+    println!("  int2b58 -d     Convert Base58 string from stdin to integer.");
+    println!("  int2b58 -h     Show this help message.");
+    println!("  int2b58 --help Show this help message.");
+}
+
 fn main() -> io::Result<()> {
     let args: Vec<String> = env::args().collect();
     let is_decode = args.contains(&"-d".to_string()) || args.contains(&"--decode".to_string());
+    let is_help = args.contains(&"-h".to_string()) || args.contains(&"--help".to_string());
+
+    if is_help {
+        print_help();
+        return Ok(());
+    }
 
     let mut input = String::new();
     io::stdin().read_to_string(&mut input)?;
