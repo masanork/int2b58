@@ -19,7 +19,7 @@ fn encode_base58(mut n: u64) -> String {
 
 fn decode_base58(s: &str) -> Result<u64, &'static str> {
     let mut num = 0;
-    for (i, char) in s.chars().enumerate() {
+    for (_i, char) in s.chars().enumerate() {
         if let Some(position) = ALPHABET.find(char) {
             num = num * 58 + position as u64;
         } else {
